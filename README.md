@@ -119,4 +119,4 @@ Este proyecto está licenciado bajo la licencia MIT - ver el archivo LICENSE par
 
 ## Autor
 
-Desarrollado por Mario Alexander Ruiz Marulanda, PMP.
+Desarrollado por Carlos Augusto Aranzazu.
