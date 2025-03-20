@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Sistema de Gestión de Lavado de Vehículos</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="bi bi-droplet-fill"></i> AutoWash Manager
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/"><i class="bi bi-house-door"></i> Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/servicios.html"><i class="bi bi-car-front"></i> Servicios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/empleados.html"><i class="bi bi-people"></i> Empleados</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/inventario.html"><i class="bi bi-box-seam"></i> Inventario</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/reportes.html"><i class="bi bi-graph-up"></i> Reportes</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container my-4">
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="mb-0">Dashboard</h1>
+            <button id="refresh-dashboard" class="btn btn-sm btn-outline-primary btn-refresh" data-refresh-target="resumen-dashboard" data-loading-function="loadDashboardData">
+                <i class="bi bi-arrow-clockwise"></i> Actualizar
+            </button>
+        </div>
+
+        <!-- Info Cards Row -->
+        <div class="row" id="resumen-dashboard">
+            <!-- Servicios Pendientes -->
+            <div class="col-md-3 col-sm-6">
+                <div class="dashboard-card bg-warning">
+                    <div class="card-title">
+                        <i class="bi bi-hourglass-split"></i> Servicios Pendientes
+                    </div>
+                    <div class="card-value" id="servicios-pendientes">0</div>
+                    <a href="/servicios.html?filter=pendientes" class="stretched-link" title="Ver servicios pendientes"></a>
+                </div>
+            </div>
+            
+            <!-- Ventas del Día -->
+            <div class="col-md-3 col-sm-6">
+                <div class="dashboard-card bg-success">
+                    <div class="card-title">
+                        <i class="bi bi-cash-coin"></i> Ventas del Día
+                    </div>
+                    <div class="card-value" id="ventas-hoy">$0</div>
+                    <a href="/reportes.html?report=ingresos" class="stretched-link" title="Ver reporte de ingresos"></a>
+                </div>
+            </div>
+            
+            <!-- Insumos con Stock Bajo -->
+            <div class="col-md-3 col-sm-6">
+                <div class="dashboard-card bg-danger">
+                    <div class="card-title">
+                        <i class="bi bi-exclamation-triangle"></i> Insumos Stock Bajo
+                    </div>
+                    <div class="card-value" id="insumos-bajos">0</div>
+                    <a href="/inventario.html?filter=stockbajo" class="stretched-link" title="Ver insumos con stock bajo"></a>
+                </div>
+            </div>
+            
+            <!-- Empleados Activos -->
+            <div class="col-md-3 col-sm-6">
+                <div class="dashboard-card bg-info">
+                    <div class="card-title">
+                        <i class="bi bi-person-badge"></i> Empleados Activos
+                    </div>
+                    <div class="card-value" id="empleados-activos">0</div>
+                    <a href="/empleados.html" class="stretched-link" title="Ver empleados"></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0"><i class="bi bi-lightning-charge"></i> Acciones Rápidas</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3 col-sm-6 mb-3">
+                                <a href="/servicios.html?action=new" class="btn btn-primary w-100 py-3">
+                                    <i class="bi bi-plus-circle"></i> Nuevo Servicio
+                                </a>
+                            </div>
+                            <div class="col-md-3 col-sm-6 mb-3">
+                                <a href="/servicios.html?filter=pendientes" class="btn btn-warning w-100 py-3">
+                                    <i class="bi bi-list-check"></i> Servicios Pendientes
+                                </a>
+                            </div>
+                            <div class="col-md-3 col-sm-6 mb-3">
+                                <a href="/inventario.html?action=update" class="btn btn-info w-100 py-3">
+                                    <i class="bi bi-box-arrow-in-down"></i> Actualizar Inventario
+                                </a>
+                            </div>
+                            <div class="col-md-3 col-sm-6 mb-3">
+                                <a href="/reportes.html?report=ingresos" class="btn btn-success w-100 py-3">
+                                    <i class="bi bi-graph-up"></i> Reporte de Ingresos
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Latest Services and Shifts -->
+        <div class="row mt-4">
+            <!-- Latest Services -->
+            <div class="col-md-8 mb-4">
+                <div class="card h-100">
+                    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0"><i class="bi bi-car-front"></i> Últimos Servicios</h5>
+                        <a href="/servicios.html" class="btn btn-sm btn-light">Ver todos</a>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Placa</th>
+                                        <th>Tipo Servicio</th>
+                                        <th>Estado</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="ultimos-servicios">
+                                    <tr>
+                                        <td colspan="4" class="text-center">Cargando datos...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Today's Shifts -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0"><i class="bi bi-clock"></i> Turnos de Hoy</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Empleado</th>
+                                        <th>Turno</th>
+                                        <th>Horario</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="proximos-turnos">
+                                    <tr>
+                                        <td colspan="3" class="text-center">Cargando datos...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="/empleados.html?tab=turnos" class="btn btn-sm btn-success w-100">
+                            <i class="bi bi-calendar-check"></i> Administrar Turnos
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white mt-5 py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><i class="bi bi-droplet-fill"></i> AutoWash Manager</h5>
+                    <p class="small">Sistema de Gestión para Lavado de Vehículos</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <p class="small">&copy; 2025 - Desarrollado por <br>Ing. Mario Alexander Ruiz Marulanda, PMP</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="/js/main.js"></script>
+</body>
+</html>
